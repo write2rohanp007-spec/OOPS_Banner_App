@@ -1,7 +1,79 @@
 public class BannerApp {
 
+    // Inner Static Class to store character and its pattern
+    static class CharacterPatternMap {
+
+        private char character;
+        private String[] pattern;
+
+        // Constructor
+        public CharacterPatternMap(char character, String[] pattern) {
+            this.character = character;
+            this.pattern = pattern;
+        }
+
+        // Getter for character
+        public char getCharacter() {
+            return character;
+        }
+
+        // Getter for pattern
+        public String[] getPattern() {
+            return pattern;
+        }
+    }
+
+    // Utility method to build one line of the banner
+    public static String buildLine(CharacterPatternMap[] letters, int row) {
+
+        StringBuilder line = new StringBuilder();
+
+        for (CharacterPatternMap letter : letters) {
+            line.append(letter.getPattern()[row]).append(" ");
+        }
+
+        return line.toString();
+    }
+
     public static void main(String[] args) {
 
+ feature/UC7-CharacterPatternClass
+        // Pattern for letter O
+        CharacterPatternMap O = new CharacterPatternMap('O', new String[]{
+                " ***** ",
+                "*     *",
+                "*     *",
+                "*     *",
+                "*     *",
+                "*     *",
+                " ***** "
+        });
+
+        // Pattern for letter P
+        CharacterPatternMap P = new CharacterPatternMap('P', new String[]{
+                "****** ",
+                "*     *",
+                "*     *",
+                "****** ",
+                "*      ",
+                "*      ",
+                "*      "
+        });
+
+        // Pattern for letter S
+        CharacterPatternMap S = new CharacterPatternMap('S', new String[]{
+                " ***** ",
+                "*     *",
+                "*      ",
+                " ***** ",
+                "      *",
+                "*     *",
+                " ***** "
+        });
+
+        // Word OOPS (array of objects)
+        CharacterPatternMap[] word = {O, O, P, S};
+=======
         String[] o = getOPattern();
         String[] p = getPPattern();
         String[] s = getSPattern();
@@ -15,9 +87,11 @@ public class BannerApp {
             String.join(" ", o[5], o[5], p[5], s[5]),
             String.join(" ", o[6], o[6], p[6], s[6])
         };
+ main
 
-        for (String line : banner) {
-            System.out.println(line);
+        // Print banner
+        for (int i = 0; i < 7; i++) {
+            System.out.println(buildLine(word, i));
         }
     }
 
