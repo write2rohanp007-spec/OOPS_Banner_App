@@ -1,19 +1,72 @@
+import java.util.HashMap;
+import java.util.Map;
+
 public class BannerApp {
+
+    // Method to create character patterns
+    public static Map<Character, String[]> createCharacterPatterns() {
+
+        Map<Character, String[]> patterns = new HashMap<>();
+
+        patterns.put('O', new String[]{
+                " ***** ",
+                "*     *",
+                "*     *",
+                "*     *",
+                "*     *",
+                "*     *",
+                " ***** "
+        });
+
+        patterns.put('P', new String[]{
+                "****** ",
+                "*     *",
+                "*     *",
+                "****** ",
+                "*      ",
+                "*      ",
+                "*      "
+        });
+
+        patterns.put('S', new String[]{
+                " ***** ",
+                "*     *",
+                "*      ",
+                " ***** ",
+                "      *",
+                "*     *",
+                " ***** "
+        });
+
+        return patterns;
+    }
+
+    // Method to print banner message
+    public static void renderBanner(String message, Map<Character, String[]> patterns) {
+
+        for (int row = 0; row < 7; row++) {
+
+            StringBuilder line = new StringBuilder();
+
+            for (char ch : message.toCharArray()) {
+
+                String[] pattern = patterns.get(ch);
+
+                if (pattern != null) {
+                    line.append(pattern[row]).append(" ");
+                }
+            }
+
+            System.out.println(line.toString());
+        }
+    }
 
     public static void main(String[] args) {
 
-        String[] banner = new String[7];
+        Map<Character, String[]> patterns = createCharacterPatterns();
 
-        banner[0] = String.join(" ", " ***** ", " ***** ", " ****** ", " ***** ");
-        banner[1] = String.join(" ", "*     *", "*     *", "*     * ", "*     *");
-        banner[2] = String.join(" ", "*     *", "*     *", "*     * ", "*     ");
-        banner[3] = String.join(" ", "*     *", "*     *", "****** ", " ***** ");
-        banner[4] = String.join(" ", "*     *", "*     *", "*      ", "     *");
-        banner[5] = String.join(" ", "*     *", "*     *", "*      ", "*    *");
-        banner[6] = String.join(" ", " ***** ", " ***** ", "*      ", " **** ");
+        String message = "OOPS";
 
-        for (String line : banner) {
-            System.out.println(line);
-        }
+        renderBanner(message, patterns);
     }
 }
